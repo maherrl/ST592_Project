@@ -4,7 +4,7 @@
 # differentially abundant taxa in microbial surveys.
 # Created by Rebecca Maher
 # Created on 10/26/18
-# Edited on 01/17/19
+# Edited on 01/23/19
 ########################################################
 
 # clear workspace-----------------------------
@@ -21,12 +21,12 @@ library(stats)
 # column should be the sample identifier with column name
 # "Sample.ID"
 
-OTUdat <- read.csv(file = "/Users/Becca/Box Sync/RAPID/family-table/otu-table-no-mitochondria-no-chloroplast-min2-names-wtax_L5.csv") # by family
+OTUdat <- read.csv(file = "~/data/otu-table-no-mitochondria-no-chloroplast-min2-names-wtax_L5.csv") # by family
 
 # Metadata: Dataframe with the first columns being the sample 
 # identifier with column name "Sample.ID"
 
-Vardat <- read.csv(file = "/Users/Becca/Box Sync/RAPID/RAPID-analysis/data/map.csv")
+Vardat <- read.csv(file = "~/data/map.csv")
 colnames(Vardat)[1] <- "Sample.ID"
 
 # Subset map to only includ ACR samples from March and May with no NAs

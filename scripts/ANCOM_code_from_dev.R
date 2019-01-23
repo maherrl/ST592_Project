@@ -1,7 +1,19 @@
+#################################################################
+## This code was taken from the ANCOM developer's website      ##
+## For our statistics Project #1 using Becca's coral data      ##
+## We will attempt to edit this code to include interactions.  ##
+## Developers website:                                         ##
+## https://sites.google.com/site/siddharthamandal1985/research ##
+## Uploaded by Becca Maher                                     ##
+## Creation data Jan 23, 2019                                  ##
+#################################################################
+
+# load libraries
 library(exactRankTests)
 library(nlme)
 library(ggplot2)
 
+# Ancom function
 ancom.W = function(otu_data,var_data,
                    adjusted,repeated,
                    main.var,adj.formula,
