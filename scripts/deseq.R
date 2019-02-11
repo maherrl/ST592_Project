@@ -164,6 +164,7 @@ res14 = res14[which(res14$padj < alpha),]
 res14 = cbind(as(res14, "data.frame"))
 res14$comparison <- "timeT4.treatmentU"
 
+# Combining results into one dataframe and saving
 res <- list(res1,res2, res3, res4, res5, res6, res7, res8, res9) %>% map_df(rownames_to_column, 'OTUID')
 write.csv(res, file = "/Users/Becca/Box Sync/Winter 2019/Statistical Genomics/ST592_Project/deseq_res_acr_int_try1.csv")
 write.csv(res_des_acr_int, file = "/Users/Becca/Box Sync/Winter 2019/Statistical Genomics/ST592_Project/deseq_res_acr_int_all.csv")
