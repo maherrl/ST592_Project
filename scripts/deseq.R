@@ -79,6 +79,14 @@ fast_melt = function(physeq,
 # Subset to only ACR and POC
 qd <- subset_samples(qd, species !="POR")
 qd <- subset_samples(qd, species !="POC")
+### rmf ###
+min(sample_sums(qd))
+mean(sample_sums(qd))
+median(sample_sums(qd))
+max(sample_sums(qd))
+plot_bar(qd,title='Abundance Distribution: Unfiltered Count Data')
+barplot(sample_sums(qd),main='Sample Sums: Unfiltered',xlab='Samples',names.arg = c(""))
+###########
 
 # Filter by prevalence and total counts
 qdt = fast_melt(qd)
@@ -87,7 +95,14 @@ prevdt = qdt[, list(Prevalence = sum(count > 0),
              by = TaxaID]
 keepTaxa = prevdt[(Prevalence >=3 & TotalCounts >10), TaxaID]
 qd = prune_taxa(keepTaxa,qd)
-
+# Looking at sampling depth
+min(sample_sums(qd))
+mean(sample_sums(qd))
+median(sample_sums(qd))
+max(sample_sums(qd))
+plot_bar(qd,title='Abundance Distribution: Filtered Count Data')
+barplot(sample_sums(qd),main='Sample Sums: Filtered',xlab='Samples',names.arg = c(""))
+###########
 
 des <- phyloseq_to_deseq2(qd, ~1)
 design(des) <- ~treatment
@@ -95,6 +110,17 @@ design(des) <- ~treatment
 cts = counts(des)
 geoMeans = apply(cts, 1, function(row) if (all(row == 0)) 0 else exp(sum(log(row[row != 0]))))
 des = estimateSizeFactors(des, geoMeans=geoMeans)
+### rmf ### looking into size factor distribution
+min(des$sizeFactor)
+max(des$sizeFactor) 
+counts<-counts(des,normalized=TRUE)
+totalCounts <- colSums2(counts)
+min(totalCounts)
+mean(totalCounts)
+median(totalCounts)
+max(totalCounts)
+barplot(totalCounts,main='Sample Sums: Normalized',xlab='Samples',names.arg = c(""))
+######
 des_acr_trt <- DESeq(des,betaPrior=F)
 
 res_des_acr_trt <- results(des_acr_trt)
